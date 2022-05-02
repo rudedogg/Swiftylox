@@ -29,9 +29,14 @@ switch CommandLine.arguments.count {
 }
 
 func runFile(_ url: URL) throws {
-  let contents = try String(contentsOf: url)
+  let sourceCode = try String(contentsOf: url)
+  run(sourceCode)
 }
 
 func runPrompt() {
+  
+}
+
+private func run(_ source: String) {
   
 }
