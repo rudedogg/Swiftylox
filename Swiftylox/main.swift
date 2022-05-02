@@ -33,8 +33,12 @@ func runFile(_ url: URL) throws {
   run(sourceCode)
 }
 
+// REPL
 func runPrompt() {
-  
+  print("Enter your lox code:")
+  while let line = readLine() {
+    run(line)
+  }
 }
 
 private func run(_ source: String) {
