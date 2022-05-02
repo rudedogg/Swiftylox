@@ -1,7 +1,7 @@
 import Foundation
 
 switch CommandLine.arguments.count {
-  case 1:
+  case 2:
     guard let fileArgument = CommandLine.arguments.first else {
       print("First argument is invalid")
       exit(64)
@@ -19,7 +19,7 @@ switch CommandLine.arguments.count {
       print(error.localizedDescription)
       exit(64)
     }
-  case 0:
+  case 1:
     // No file path provided, open an interactive interpreter
     runPrompt()
   default:
