@@ -13,7 +13,12 @@ switch CommandLine.arguments.count {
     }
     
     // We have a valid fileURL, call runFile() with it
-    runFile(fileURL)
+    do {
+      try runFile(fileURL)
+    } catch(let error) {
+      print(error.localizedDescription)
+      exit(64)
+    }
   case 0:
     // No file path provided, open an interactive interpreter
     runPrompt()
@@ -23,8 +28,8 @@ switch CommandLine.arguments.count {
   exit(64)
 }
 
-func runFile(_ url: URL) {
-  
+func runFile(_ url: URL) throws {
+  let contents = try String(contentsOf: url)
 }
 
 func runPrompt() {
