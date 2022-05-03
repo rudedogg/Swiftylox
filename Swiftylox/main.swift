@@ -31,6 +31,10 @@ switch CommandLine.arguments.count {
 func runFile(_ url: URL) throws {
   let sourceCode = try String(contentsOf: url)
   run(sourceCode)
+  
+  if hadError {
+    exit(65)
+  }
 }
 
 // REPL
@@ -38,9 +42,19 @@ func runPrompt() {
   print("Enter your lox code:")
   while let line = readLine() {
     run(line)
+    hadError = false
   }
 }
 
 private func run(_ source: String) {
   
+var hadError = false
+
+private func error(line: Int, message: String) {
+  report(line: line, where: "", message: message)
+}
+
+private func report(line: Int, `where`: String, message: String) {
+  print("line \(line) Error \(`where`): \(message)")
+  hadError = true
 }
