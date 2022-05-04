@@ -14,4 +14,9 @@ class Token {
   }
 }
 
+extension Token: CustomStringConvertible {
+  var description: String {
+    return "\(type) \(lexeme) \(literal ?? "no literal")"
+  }
+}
 
