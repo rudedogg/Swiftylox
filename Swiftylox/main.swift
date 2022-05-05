@@ -47,7 +47,14 @@ func runPrompt() {
 }
 
 private func run(_ source: String) {
+ let scanner = Scanner(source: source)
+  let tokens: [Token] = scanner.scanTokens()
   
+  for token in tokens {
+    print(token)
+  }
+}
+
 var hadError = false
 
 private func error(line: Int, message: String) {
