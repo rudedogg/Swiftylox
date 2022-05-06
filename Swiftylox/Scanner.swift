@@ -63,7 +63,7 @@ class Scanner  {
   }
   
   private func addToken(type: TokenType, literal: Any?) {
-    let text = String(source[start...current])
+    let text = String(source[start..<current])
     tokens.append(Token(type: type, lexeme: text, literal: literal, line: line))
   }
   
