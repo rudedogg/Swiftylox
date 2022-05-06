@@ -42,16 +42,25 @@ class Scanner  {
     let c = advance()
     
     switch(c) {
-      case "'":
+      case "(":
         addToken(.lParen)
+      case ")":
         addToken(.rParen)
+      case "{":
         addToken(.lBrace)
+      case "}":
         addToken(.rBrace)
+      case ",":
         addToken(.comma)
+      case ".":
         addToken(.dot)
+      case "-":
         addToken(.minus)
+      case "+":
         addToken(.plus)
+      case ";":
         addToken(.semicolon)
+      case "*":
         addToken(.star)
       default:
         print("\(line): Unexpected character.")
