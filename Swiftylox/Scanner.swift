@@ -54,7 +54,7 @@ class Scanner  {
         addToken(.semicolon)
         addToken(.star)
       default:
-        fatalError()
+        print("\(line): Unexpected character.")
     }
   }
  
