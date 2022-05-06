@@ -13,8 +13,12 @@ class Scanner  {
   }
   
   private func advance() -> Character {
-    let nextIndex = source.index(after: current)
-    return source[nextIndex]
+    defer {
+      // Advance the current index after returning
+      current = source.index(after: current)
+    }
+    
+    return source[current]
   }
   
   init(source: String) {
