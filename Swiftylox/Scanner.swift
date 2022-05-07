@@ -62,8 +62,28 @@ class Scanner  {
         addToken(.semicolon)
       case "*":
         addToken(.star)
+      case "!":
+        addToken(match("=") ? .bangEquals : .bang)
+      case "=":
+        addToken(match("=") ? .equalEqual : .equal)
+      case "<":
+        addToken(match("=") ? .lessEqual : .less)
+      case ">":
+        addToken(match("=") ? .greaterEqual : .greater)
       default:
         print("\(line): Unexpected character.")
+    }
+  }
+  
+  private func match(_ expected: Character) -> Bool {
+    guard !isAtEnd else { return false }
+    
+    if source[current] == expected {
+      // This can be thought of as "consuming" the current character – since we're advancing the current index
+      current = source.index(after: current)
+      return true
+    } else {
+      return false
     }
   }
  
