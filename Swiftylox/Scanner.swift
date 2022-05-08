@@ -70,6 +70,16 @@ class Scanner  {
         addToken(match("=") ? .lessEqual : .less)
       case ">":
         addToken(match("=") ? .greaterEqual : .greater)
+      case "/":
+        if(match("/")) {
+          // Consume the comment but don't add a token
+          while(peek() != "\n" && !isAtEnd) {
+            _ = advance()
+          }
+        }
+        else {
+          addToken(.slash)
+        }
       default:
         print("\(line): Unexpected character.")
     }
@@ -85,6 +95,13 @@ class Scanner  {
     } else {
       return false
     }
+  }
+  
+  // Lookahead
+  private func peek() -> Character {
+    guard !isAtEnd else { return "\0" }
+    
+    return source[current]
   }
  
   private func addToken(_ type: TokenType) {
