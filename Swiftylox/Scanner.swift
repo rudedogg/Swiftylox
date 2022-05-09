@@ -80,6 +80,15 @@ class Scanner  {
         else {
           addToken(.slash)
         }
+      case " ":
+        break
+      case "\r":
+        break
+      case "\t":
+        break
+      case "\n":
+        line += 1
+        
       default:
         print("\(line): Unexpected character.")
     }
