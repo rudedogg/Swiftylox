@@ -53,7 +53,7 @@ private func run(_ source: String) {
 
 var hadError = false
 
-private func error(line: Int, message: String) {
+func error(line: Int, message: String) {
   report(line: line, where: "", message: message)
 }
 
