@@ -88,10 +88,35 @@ class Scanner  {
         break
       case "\n":
         line += 1
-        
+      case "\"":
+        string()
       default:
         print("\(line): Unexpected character.")
     }
+  }
+  
+  private func string() {
+    while(peek() != "\"" && !isAtEnd) {
+      // Support multi-line strings
+      if peek() == "\n" {
+        line += 1
+      }
+      advance()
+    }
+    
+    if isAtEnd {
+      error(line: line, message: "Unterminated string")
+      return
+    }
+    
+    advance() // The closing "
+    
+    // Calculate indices needed to trim off the surrounding quotes
+    let startIndex = source.index(after: source.startIndex) // The index after the opening "
+    let endIndex = source.index(before: source.endIndex) // The index before the closing "
+    
+    let substring = source[startIndex..<endIndex]
+    addToken(.string, literal: String(substring))
   }
   
   private func match(_ expected: Character) -> Bool {
