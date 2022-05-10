@@ -2,17 +2,12 @@ import Foundation
 
 switch CommandLine.arguments.count {
   case 2:
-    guard let fileArgument = CommandLine.arguments.first else {
-      print("First argument is invalid")
-      exit(64)
-    }
+    // Get the file path argument, it's argument #2
+    let fileArgument = CommandLine.arguments[CommandLine.arguments.index(after: CommandLine.arguments.startIndex)]
     
-    guard let fileURL = URL(string: fileArgument) else {
-      print("Provided file argument is not valid")
-      exit(64)
-    }
+    let fileURL = URL(fileURLWithPath: fileArgument)
     
-    // We have a valid fileURL, call runFile() with it
+    // We have a fileURL, call runFile() with it
     do {
       try runFile(fileURL)
     } catch(let error) {
@@ -29,6 +24,7 @@ switch CommandLine.arguments.count {
 }
 
 func runFile(_ url: URL) throws {
+  print("Attempting to run file: \(url)")
   let sourceCode = try String(contentsOf: url)
   run(sourceCode)
   
