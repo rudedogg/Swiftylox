@@ -91,8 +91,30 @@ class Scanner  {
       case "\"":
         string()
       default:
-        print("\(line): Unexpected character.")
+        if c.isNumber {
+          number()
+        } else {
+          print("\(line): Unexpected character.")
+        }
     }
+  }
+  
+  private func number() {
+    while isDigit(peek()) {
+      advance()
+      
+      if peek() == "." && isDigit(peekNext()) {
+        // Consume the "."
+        advance()
+        
+        while isDigit(peek()) {
+          advance()
+        }
+      }
+      
+    }
+    let numberLiteralString = source[start..<current]
+    addToken(.number, literal: Double(numberLiteralString))
   }
   
   private func string() {
@@ -136,6 +158,15 @@ class Scanner  {
     guard !isAtEnd else { return "\0" }
     
     return source[current]
+  }
+  
+  private func peekNext() -> Character {
+    if source.index(after: current) >= source.endIndex {
+      return "\0"
+    } else {
+      let nextIndex = source.index(after: current)
+      return source[nextIndex]
+    }
   }
   
   private func isDigit(_ character: Character) -> Bool {
