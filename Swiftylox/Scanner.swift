@@ -137,6 +137,10 @@ class Scanner  {
     
     return source[current]
   }
+  
+  private func isDigit(_ character: Character) -> Bool {
+    return "0123456789".contains(character)
+  }
  
   private func addToken(_ type: TokenType) {
     addToken(type, literal: nil)
