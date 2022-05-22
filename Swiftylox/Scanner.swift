@@ -91,7 +91,7 @@ class Scanner  {
       case "\"":
         string()
       default:
-        if c.isNumber {
+        if isDigit(c) {
           number()
         } else {
           print("\(line): Unexpected character.")
