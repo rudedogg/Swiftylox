@@ -93,10 +93,20 @@ class Scanner  {
       default:
         if isDigit(c) {
           number()
+        } else if isAlpha(c) {
+          identifier()
         } else {
           print("\(line): Unexpected character.")
         }
     }
+  }
+  
+  private func identifier() {
+    while peek().isLetter {
+      advance()
+    }
+    
+    addToken(.identifier)
   }
   
   private func number() {
@@ -167,6 +177,16 @@ class Scanner  {
       let nextIndex = source.index(after: current)
       return source[nextIndex]
     }
+  }
+  
+  private func isAlpha(_ character: Character) -> Bool {
+    return (character >= "a" && character <= "z") ||
+    (character >= "A" && character <= "Z") ||
+    character == "_"
+  }
+  
+  private func isAlphaNumeric(_ character: Character) -> Bool {
+    return isAlpha(character) || isDigit(character)
   }
   
   private func isDigit(_ character: Character) -> Bool {
