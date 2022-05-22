@@ -1,6 +1,26 @@
 import Foundation
 
 class Scanner  {
+  
+  private let keywords: [String: TokenType] = [
+    "and": .and,
+    "class": .class,
+    "else": .else,
+    "false": .false,
+    "for": .for,
+    "fun": .fun,
+    "if": .if,
+    "nil": .nil,
+    "or": .or,
+    "print": .print,
+    "return": .return,
+    "super": .super,
+    "this": .this,
+    "true": .true,
+    "var": .var,
+    "while": .while,
+  ]
+  
   private var source: String
   private var tokens: [Token] = []
   
