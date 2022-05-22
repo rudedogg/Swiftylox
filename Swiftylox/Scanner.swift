@@ -126,7 +126,14 @@ class Scanner  {
       advance()
     }
     
-    addToken(.identifier)
+    // Look up the identifier text in the keywords dictionary and if it matches a token, insert a token of that type instead.
+    // If not, it's an identifier
+    let text = String(source[start..<current])
+    if let type = keywords[text] {
+      addToken(type)
+    } else {
+      addToken(.identifier)
+    }
   }
   
   private func number() {
